@@ -3,7 +3,7 @@ import { defineConfig } from 'vite';
 // https://vitejs.dev/config
 export default defineConfig({
   build: {
-    target: 'node14',
+    target: 'es2022',
     rollupOptions: {
       external: [
         'sqlite3',
