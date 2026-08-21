@@ -20,6 +20,8 @@ export class HybridBibliaService {
   private useSQLite = false;
   private initialized = false;
   private initializing = false;
+  private livrosCache: Livro[] | null = null;
+  private livrosCacheTime = 0;
 
   constructor() {
     this.db = getDatabase();
@@ -140,9 +142,15 @@ export class HybridBibliaService {
     
     if (this.useSQLite) {
       try {
+        // Cache de 5 min para evitar query repetida (66 livros, baixo churn)
+        if (this.livrosCache && Date.now() - this.livrosCacheTime < 5 * 60 * 1000) {
+          return { success: true, data: this.livrosCache };
+        }
         const livros = await this.db.all<Livro>(
           'SELECT * FROM livros ORDER BY ordem'
         );
+        this.livrosCache = livros;
+        this.livrosCacheTime = Date.now();
         return { success: true, data: livros };
       } catch (error) {
         console.error('Erro SQLite getLivros:', error);
@@ -268,7 +276,15 @@ export class HybridBibliaService {
           params.push(parametros.testamento);
         }
         
-        sql += ' ORDER BY l.ordem, v.capitulo, v.numero LIMIT 100';
+        // LIMIT 50 + ranking por bm25 (FTS5) quando disponível, fallback para ordem canônica
+        try {
+          const rankedSql = sql + ' ORDER BY bm25(versiculos_fts) LIMIT 50';
+          const resultados = await this.db.all<ResultadoBusca>(rankedSql, params);
+          return { success: true, data: resultados };
+        } catch {
+          // FTS sem bm25 ou tabela contentless — fallback
+        }
+        sql += ' ORDER BY l.ordem, v.capitulo, v.numero LIMIT 50';
         
         const resultados = await this.db.all<ResultadoBusca>(sql, params);
         return { success: true, data: resultados };
