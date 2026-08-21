@@ -349,20 +349,22 @@ app.whenReady().then(async () => {
   try {
     console.log('Inicializando aplicação...');
 
-    // Criar janela principal
+    // Criar janela principal imediatamente (não bloqueia no DB)
     createWindow();
 
-    console.log('Aplicação inicializada com sucesso!');
+    console.log('Aplicação inicializada com sucesso! Janela exibida, inicializando DB em background...');
 
-    // Registrar handlers IPC com timeout para não bloquear indefinidamente
-    Promise.race([
-      registerIpcHandlers(),
-      new Promise((_, reject) =>
-        setTimeout(() => reject(new Error('Timeout na inicialização dos serviços')), 30000)
-      )
-    ]).catch(error => {
-      console.error('Erro ao inicializar serviços:', error);
-      console.log('Aplicação continuará funcionando com funcionalidade limitada');
+    // Inicializar DB em background sem bloquear a UI (splash no renderer cobre o tempo)
+    setImmediate(() => {
+      Promise.race([
+        registerIpcHandlers(),
+        new Promise((_, reject) =>
+          setTimeout(() => reject(new Error('Timeout na inicialização dos serviços')), 30000)
+        )
+      ]).catch(error => {
+        console.error('Erro ao inicializar serviços:', error);
+        console.log('Aplicação continuará funcionando com funcionalidade limitada');
+      });
     });
 
   } catch (error) {

@@ -13,19 +13,33 @@ const Favoritos = React.lazy(() => import('./pages/Favoritos'));
 const Anotacoes = React.lazy(() => import('./pages/Anotacoes'));
 const Configuracoes = React.lazy(() => import('./pages/Configuracoes'));
 
+const VERSICULOS_SPLASH = [
+  { texto: 'Lâmpada para os meus pés é tua palavra, e luz para o meu caminho.', ref: 'Salmos 119:105' },
+  { texto: 'No princípio era o Verbo, e o Verbo estava com Deus, e o Verbo era Deus.', ref: 'João 1:1' },
+  { texto: 'Toda a Escritura é divinamente inspirada, e proveitosa para ensinar.', ref: '2 Timóteo 3:16' },
+  { texto: 'Escondi a tua palavra no meu coração, para eu não pecar contra ti.', ref: 'Salmos 119:11' },
+  { texto: 'Porque a palavra de Deus é viva e eficaz.', ref: 'Hebreus 4:12' },
+];
+
 const App: React.FC = () => {
   const [paginaAtual, setPaginaAtual] = useState<string>('inicio');
   const [carregando, setCarregando] = useState(true);
+  const [versiculoSplash] = useState(() => VERSICULOS_SPLASH[Math.floor(Math.random() * VERSICULOS_SPLASH.length)]);
 
   useEffect(() => {
-    // Verificar se a API do Electron está disponível
-    if (typeof window !== 'undefined' && window.electronAPI) {
-      console.log('API Electron disponível');
+    // Splash mínimo de 600ms para leitura do versículo, depois verifica API
+    const timer = setTimeout(() => {
+      if (typeof window !== 'undefined' && window.electronAPI) {
+        console.log('API Electron disponível');
+      } else {
+        console.error('API Electron não está disponível');
+      }
       setCarregando(false);
-    } else {
-      console.error('API Electron não está disponível');
-      setCarregando(false);
-    }
+    }, 600);
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
 
     // Escutar ações do menu
     const handleMenuAction = (action: string) => {
@@ -107,10 +121,14 @@ const App: React.FC = () => {
 
   if (carregando) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="text-center space-y-4">
+      <div className="min-h-screen bg-background flex items-center justify-center p-6">
+        <div className="text-center space-y-6 max-w-md">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto"></div>
           <p className="text-muted-foreground">Carregando Bíblia Sagrada...</p>
+          <blockquote className="border-l-2 border-primary/30 pl-4 text-left">
+            <p className="text-sm italic text-foreground">“{versiculoSplash.texto}”</p>
+            <cite className="text-xs text-muted-foreground">— {versiculoSplash.ref}</cite>
+          </blockquote>
         </div>
       </div>
     );
