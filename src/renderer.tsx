@@ -3,12 +3,12 @@ import { createRoot } from 'react-dom/client';
 import Layout from './components/Layout';
 import Inicio from './pages/Inicio';
 import Biblia from './pages/Biblia';
-import Busca from './pages/Busca';
 import { TemaProvider } from './hooks/useTema';
 import { NavegacaoProvider } from './hooks/useNavegacao';
 import './index.css';
 
-// Lazy loading das páginas para melhor performance
+// Lazy loading para reduzir bundle inicial (issue #5)
+const Busca = React.lazy(() => import('./pages/Busca'));
 const Favoritos = React.lazy(() => import('./pages/Favoritos'));
 const Anotacoes = React.lazy(() => import('./pages/Anotacoes'));
 const Configuracoes = React.lazy(() => import('./pages/Configuracoes'));
@@ -81,7 +81,11 @@ const App: React.FC = () => {
       case 'biblia':
         return <Biblia />;
       case 'busca':
-        return <Busca />;
+        return (
+          <React.Suspense fallback={<div className="p-6">Carregando busca...</div>}>
+            <Busca />
+          </React.Suspense>
+        );
       case 'favoritos':
         return (
           <React.Suspense fallback={<div className="p-6">Carregando favoritos...</div>}>
