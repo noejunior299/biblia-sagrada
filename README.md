@@ -1,234 +1,222 @@
-# Bíblia Sagrada - Aplicativo Desktop
+# Bíblia Sagrada — King James em Português
 
-Um aplicativo completo da Bíblia Sagrada King James em Português, desenvolvido em Electron + React + TypeScript + SQLite3, com interface moderna e recursos avançados de estudo.
+> "No princípio era o Verbo, e o Verbo estava com Deus, e o Verbo era Deus." — João 1:1
+>
+> "Lâmpada para os meus pés é tua palavra, e luz para o meu caminho." — Salmos 119:105
+>
+> "Toda a Escritura é divinamente inspirada, e proveitosa para ensinar, para redarguir, para corrigir, para instruir em justiça." — 2 Timóteo 3:16
+
+Aplicativo desktop da Bíblia Sagrada King James em Português, desenvolvido em Electron, React, TypeScript e SQLite. Leitura offline, busca, favoritos, anotações e histórico — com foco em reverência, sobriedade e fidelidade ao texto.
 
 ![Bíblia Sagrada](./assets/screenshot.png)
 
-## 🚀 Funcionalidades
+---
 
-### 📖 Leitura
-- **Navegação Intuitiva**: Navegue facilmente por livros, capítulos e versículos
-- **Interface Moderna**: Design responsivo e limpo inspirado no Material Design
-- **Temas**: Modo claro, escuro ou automático baseado no sistema
-- **Tipografia Configurável**: Ajuste tamanho e família da fonte conforme sua preferência
+## Propósito
 
-### 🔍 Busca Avançada
-- **Busca Full-Text**: Encontre versículos por palavras ou frases
-- **Filtros Inteligentes**: Busque por livro específico ou testamento
-- **Busca Exata**: Opção para busca literal ou por palavras-chave
-- **Resultados Destacados**: Termos de busca destacados nos resultados
+Este projeto existe para tornar a leitura e o estudo da Palavra acessíveis, estáveis e sem distrações. Destina-se a quem deseja meditar, estudar e guardar a Escritura no dia a dia, com total funcionamento offline e dados mantidos localmente. Não há coleta de dados nem dependência de serviços externos.
 
-### ❤️ Favoritos
-- **Marcar Versículos**: Salve seus versículos favoritos com um clique
-- **Organização**: Ordene por data, livro ou relevância
-- **Exportação**: Exporte sua lista de favoritos
-- **Acesso Rápido**: Veja seus favoritos na tela inicial
+"Escondi a tua palavra no meu coração, para eu não pecar contra ti." — Salmos 119:11
 
-### 📝 Anotações Pessoais
-- **Editor Rico**: Crie anotações detalhadas para qualquer versículo
-- **Organização**: Gerencie suas anotações por título, data ou livro
-- **Busca**: Encontre rapidamente suas reflexões pessoais
-- **Backup**: Suas anotações são salvas localmente e podem ser exportadas
+## Fundamento Bíblico
 
-### 📊 Recursos Extras
-- **Versículo do Dia**: Um versículo diferente apresentado diariamente
-- **Histórico de Leitura**: Acompanhe seus últimos capítulos visitados
-- **Estatísticas**: Veja suas métricas de uso e progresso
-- **Modo Offline**: Funciona completamente sem internet
+- "Toda a Escritura é divinamente inspirada..." — 2 Timóteo 3:16-17
+- "Porque a palavra de Deus é viva e eficaz..." — Hebreus 4:12
+- "A lei do Senhor é perfeita, e refrigera a alma..." — Salmos 19:7
 
-## 🛠️ Tecnologias
+## Funcionalidades
 
-- **Frontend**: React 19 + TypeScript
-- **Desktop**: Electron 37
-- **Database**: SQLite3 com índices Full-Text Search
-- **Styling**: Tailwind CSS + shadcn/ui
-- **Icons**: Lucide React
-- **Build**: Vite + Electron Forge
+- **Leitura** — Navegação por livros, capítulos e versículos. Temas claro, escuro e automático. Tipografia configurável (tamanho e família).
+- **Busca** — Busca por palavras ou frases, com filtros por livro e testamento, e destaque dos termos.
+- **Favoritos** — Marcação de versículos com ordenação e exportação.
+- **Anotações** — Editor para reflexões vinculadas a cada versículo, com busca e gerenciamento local.
+- **Recursos adicionais** — Versículo do dia, histórico de leitura, estatísticas de uso e funcionamento completamente offline.
 
-## 📋 Pré-requisitos
+## Tecnologias
 
-- Node.js 18+
-- npm ou yarn
+| Camada | Tecnologia |
+|---|---|
+| Interface | React 19, TypeScript, Tailwind CSS, shadcn/ui, Lucide React |
+| Desktop | Electron 37, Electron Forge, Vite |
+| Dados | SQLite3 com índices FTS |
+| Build | Vite, Electron Forge |
+
+## Pré-requisitos
+
+- Node.js 18 ou superior
+- Bun (gerenciador recomendado) ou npm
 - Git
 
-### Para Ubuntu/Debian:
+Para Ubuntu/Debian, dependências nativas para compilação de módulos:
+
 ```bash
 sudo apt update
-sudo apt install nodejs npm git build-essential libnss3-dev libatk-bridge2.0-dev libxkbcommon-dev libxcomposite-dev libxdamage-dev libxrandr-dev libgbm-dev libxss-dev libasound2-dev
+sudo apt install nodejs git build-essential libnss3-dev libatk-bridge2.0-dev libxkbcommon-dev libxcomposite-dev libxdamage-dev libxrandr-dev libgbm-dev libxss-dev libasound2-dev
 ```
 
-## 🚀 Instalação e Execução
+## Instalação e Execução
 
-### 1. Clone o repositório
+1. Clone o repositório:
+
 ```bash
-git clone https://github.com/noejunior792/biblia-sagrada.git
+git clone https://github.com/noejunior299/biblia-sagrada.git
 cd biblia-sagrada
 ```
 
-### 2. Instale as dependências
+2. Instale as dependências:
+
 ```bash
-npm install
+bun install
 ```
 
-### 3. Execute em modo de desenvolvimento
+3. Execute em desenvolvimento:
+
 ```bash
-npm run dev
+bun run dev
 ```
 
-### 4. Construa o aplicativo
+4. Verificação de tipos e lint:
+
 ```bash
-npm run build
+bun run type-check
+bun run lint
 ```
 
-### 5. Gere o pacote .deb para Ubuntu
+5. Empacotamento local (sem instalador):
+
 ```bash
-npm run make:deb
+bun run package
 ```
 
-O arquivo `.deb` será criado na pasta `out/`.
+6. Gerar pacote para Ubuntu/Debian:
 
-## 📦 Empacotamento
-
-### Para Linux (Ubuntu/Debian):
 ```bash
-npm run make:deb
+bun run make:deb
 ```
 
-### Para todas as plataformas Linux:
-```bash
-npm run make:linux
-```
+O arquivo `.deb` será gerado em `out/production/make/`.
 
-### Para Windows:
-```bash
-npm run make:win
-```
+## Empacotamento
 
-## 🔧 Desenvolvimento
+| Alvo | Comando |
+|---|---|
+| Ubuntu/Debian (.deb) | `bun run make:deb` |
+| Todas as plataformas Linux | `bun run make:linux` |
+| Windows | `bun run make:win` |
+| RPM | `bun run make:rpm` |
 
-### Estrutura do Projeto
+## Estrutura do Projeto
+
 ```
-biblia/
+biblia-sagrada/
 ├── src/
-│   ├── components/          # Componentes React reutilizáveis
-│   │   └── ui/             # Componentes de interface base
-│   ├── pages/              # Páginas principais da aplicação
-│   ├── hooks/              # React hooks personalizados
-│   ├── database/           # Camada de banco de dados
-│   ├── types/              # Definições TypeScript
-│   ├── utils/              # Utilitários e helpers
-│   ├── main.ts             # Processo principal do Electron
-│   ├── preload.ts          # Script de preload seguro
-│   └── renderer.tsx        # Aplicação React principal
-├── assets/                 # Recursos estáticos
-├── forge.config.ts         # Configuração do Electron Forge
+│   ├── components/       # Componentes React
+│   │   └── ui/           # Componentes base de interface
+│   ├── pages/            # Páginas principais
+│   ├── hooks/            # Hooks React
+│   ├── database/         # Camada de banco de dados (SQLite, serviços, migração)
+│   ├── types/            # Definições TypeScript
+│   ├── utils/            # Utilitários
+│   ├── main.ts           # Processo principal do Electron
+│   ├── preload.ts        # Preload seguro (contextIsolation)
+│   └── renderer.tsx      # Aplicação React
+├── assets/               # Recursos estáticos (ícones, KJA.json)
+├── forge.config.ts       # Configuração do Electron Forge
+├── vite.*.config.ts      # Configurações Vite (main, preload, renderer)
 └── package.json
 ```
 
-### Scripts Disponíveis
+## Scripts
 
 | Script | Descrição |
-|--------|-----------|
-| `npm run dev` | Inicia em modo desenvolvimento |
-| `npm run build` | Constrói o aplicativo |
-| `npm run make:deb` | Gera pacote .deb |
-| `npm run make:rpm` | Gera pacote .rpm |
-| `npm run lint` | Executa linting |
-| `npm run type-check` | Verifica tipos TypeScript |
+|---|---|
+| `bun run dev` | Inicia em modo desenvolvimento |
+| `bun run build` | Compila a aplicação |
+| `bun run package` | Empacota sem gerar instalador |
+| `bun run make:deb` | Gera pacote .deb |
+| `bun run make:rpm` | Gera pacote .rpm |
+| `bun run make:linux` | Gera todos os alvos Linux |
+| `bun run lint` | Executa ESLint |
+| `bun run lint:fix` | Corrige problemas de lint |
+| `bun run type-check` | Verifica tipos TypeScript |
+| `bun run clean` | Remove `out`, `dist`, `.vite` e `.temp` |
 
-## 🎨 Personalização
+## Banco de Dados
 
-### Temas
-O aplicativo suporta três modos de tema:
-- **Claro**: Interface clara para leitura diurna
-- **Escuro**: Interface escura para leitura noturna
-- **Sistema**: Segue automaticamente o tema do sistema operacional
+SQLite local, sem servidor. Tabelas principais:
 
-### Tipografia
-Configure a experiência de leitura:
-- **Tamanhos**: Pequena, Média, Grande, Extra Grande
-- **Famílias**: Sistema, Serif, Sans Serif, Monoespaçada
+- `livros` — metadados dos livros bíblicos
+- `versiculos` — texto dos versículos com índice FTS
+- `favoritos` — versículos marcados
+- `anotacoes` — anotações do usuário
+- `historico_leitura` — histórico de navegação
+- `configuracoes` — preferências
 
-## 🗄️ Banco de Dados
+A carga inicial é feita a partir de `assets/KJA.json` via `scripts/migrate-json-to-sqlite`. O banco fica no diretório de dados do usuário e não é enviado a terceiros.
 
-O aplicativo usa SQLite3 com as seguintes tabelas:
+## Segurança
 
-- `livros` - Informações dos livros bíblicos
-- `versiculos` - Texto completo dos versículos com índice FTS
-- `favoritos` - Versículos marcados pelo usuário
-- `anotacoes` - Anotações pessoais dos usuários
-- `historico_leitura` - Histórico de navegação
-- `configuracoes` - Preferências do usuário
+- `contextIsolation` habilitado, `nodeIntegration` desabilitado no renderer
+- Comunicação via `preload` com API mínima e validada (IPC)
+- Content Security Policy restritiva
+- Validação de navegação externa (links abertos no navegador do sistema)
 
-## 🔒 Segurança
+## Personalização
 
-- **Context Isolation**: Habilitado para máxima segurança
-- **Node Integration**: Desabilitado no renderer
-- **Content Security Policy**: Configurado restritivamente
-- **Preload Seguro**: API limitada e validada
+**Temas:** claro, escuro e sistema (segue o sistema operacional).
 
-## 🤝 Contribuição
+**Tipografia:** tamanhos pequeno, médio, grande e extra grande; famílias sistema, serif, sans-serif e monoespaçada.
+
+## Contribuição
 
 1. Faça um fork do projeto
-2. Crie sua branch de feature (`git checkout -b feature/AmazingFeature`)
-3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
-4. Push para a branch (`git push origin feature/AmazingFeature`)
-5. Abra um Pull Request
+2. Crie sua branch (`git checkout -b feature/nome-da-feature`)
+3. Commit com mensagem descritiva (`git commit -m "feat: descrição"`)
+4. Push (`git push origin feature/nome-da-feature`)
+5. Abra um Pull Request para `dev`
 
-### Diretrizes de Desenvolvimento
+Diretrizes:
 
-- Use TypeScript para type safety
-- Siga os padrões ESLint configurados
-- Escreva commits descritivos
-- Teste em múltiplas plataformas
-- Mantenha a documentação atualizada
+- TypeScript com tipagem rigorosa
+- Seguir configuração ESLint do projeto
+- Mensagens de commit no padrão convencional
+- Testar em Linux (alvo principal) e, quando possível, em outras plataformas
+- Manter a documentação atualizada
+- Zelar por linguagem e conteúdo compatíveis com o propósito da obra
 
-## 📜 Licença
+"Portanto, quer comais quer bebais, ou façais outra qualquer coisa, fazei tudo para glória de Deus." — 1 Coríntios 10:31
 
-Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICENSE) para detalhes.
+## Licença
 
-## 🙏 Agradecimentos
+Licenciado sob MIT. Consulte o arquivo [LICENSE](LICENSE).
 
-- **King James Bible**: Tradução utilizada
-- **Electron Team**: Framework desktop
-- **React Team**: Biblioteca de interface
-- **Tailwind CSS**: Framework de estilização
-- **shadcn/ui**: Componentes de interface
-- **Lucide**: Conjunto de ícones
+## Agradecimentos
 
-## 📞 Suporte
+- Tradução King James em Português
+- Equipe Electron, React, Vite, Tailwind CSS, shadcn/ui e Lucide
 
-- **Issues**: [GitHub Issues](https://github.com/noejunior792/biblia-sagrada/issues)
-- **Discussões**: [GitHub Discussions](https://github.com/noejunior792/biblia-sagrada/discussions)
-- **Email**: bibliasagrada@noejunior.me
+## Suporte
 
-## 🔄 Versões
+- Issues: [GitHub Issues](https://github.com/noejunior299/biblia-sagrada/issues)
+- Discussões: [GitHub Discussions](https://github.com/noejunior299/biblia-sagrada/discussions)
+- Email: bibliasagrada@noejunior.me
 
-### v1.0.0 (Atual)
-- ✅ Leitura completa da Bíblia
-- ✅ Sistema de favoritos
-- ✅ Anotações pessoais
-- ✅ Busca avançada
-- ✅ Temas claro/escuro
-- ✅ Versículo do dia
-- ✅ Histórico de leitura
-- ✅ Empacotamento .deb
+## Versões
 
-### Próximas Versões
-- 🔄 Planos de leitura
-- 🔄 Comentários bíblicos
-- 🔄 Mapas bíblicos
-- 🔄 Sincronização na nuvem
-- 🔄 Múltiplas traduções
-- 🔄 Modo de apresentação
+### v1.0.0
 
-## 📊 Status do Projeto
+- Leitura completa da Bíblia
+- Favoritos, anotações, busca, temas, versículo do dia, histórico e empacotamento .deb
 
-![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
-![Version](https://img.shields.io/badge/version-1.0.0-blue)
-![License](https://img.shields.io/badge/license-MIT-green)
-![Platform](https://img.shields.io/badge/platform-Linux%20%7C%20Windows%20%7C%20macOS-lightgrey)
+### Próximas versões
+
+- Planos de leitura
+- Comentários e referências cruzadas
+- Mapas bíblicos
+- Sincronização opcional
+- Múltiplas traduções
+- Modo apresentação
 
 ---
 
-**Desenvolvido com ❤️ para a comunidade cristã**
+Soli Deo Gloria.
