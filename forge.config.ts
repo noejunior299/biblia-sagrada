@@ -25,7 +25,9 @@ const config: ForgeConfig = {
       './assets/icon-256.png'
     ]
   },
-  rebuildConfig: {},
+  rebuildConfig: {
+    onlyModules: ['sqlite3'],
+  },
   makers: [
     new MakerSquirrel({
       name: 'biblia-sagrada',
