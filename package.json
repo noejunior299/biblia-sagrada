@@ -33,8 +33,7 @@
     "lint:fix": "eslint --ext .ts,.tsx . --fix",
     "type-check": "tsc --noEmit",
     "clean": "rimraf out dist .vite .temp",
-    "test": "echo \"No tests specified\" && exit 0",
-    "postinstall": "electron-builder install-app-deps"
+    "test": "echo \"No tests specified\" && exit 0"
   },
   "keywords": [
     "biblia",
