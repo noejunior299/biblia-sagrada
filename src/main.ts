@@ -1,6 +1,7 @@
 import { app, BrowserWindow, ipcMain, Menu } from 'electron';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
+import fs from 'node:fs';
 import { initBibliaService } from './database/biblia-service';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -26,6 +27,22 @@ process.env.VITE_PUBLIC = VITE_DEV_SERVER_URL ? path.join(process.env.APP_ROOT, 
 
 let win: BrowserWindow | null;
 
+function getAppIcon(): string | undefined {
+  const candidates = [
+    path.join(process.resourcesPath, 'assets/icon.png'),
+    path.join(process.resourcesPath, 'app.asar.unpacked/assets/icon.png'),
+    path.join(__dirname, '../../assets/icon.png'),
+    path.join(process.env.APP_ROOT || '', 'assets/icon.png'),
+    path.join(process.env.VITE_PUBLIC || '', 'icon.png'),
+  ];
+  for (const p of candidates) {
+    try {
+      if (fs.existsSync(p)) return p;
+    } catch {}
+  }
+  return candidates[0];
+}
+
 function createWindow() {
   win = new BrowserWindow({
     width: 1200,
@@ -34,7 +51,7 @@ function createWindow() {
     minHeight: 600,
     show: false,
     autoHideMenuBar: true,
-    icon: path.join(process.env.VITE_PUBLIC || '', 'icon.png'),
+    icon: getAppIcon(),
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: false,

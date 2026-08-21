@@ -15,20 +15,14 @@ const config: ForgeConfig = {
     executableName: 'biblia-sagrada',
     appBundleId: 'com.bibliasagrada.app',
     appCategoryType: 'public.app-category.reference',
-    icon: './assets/icon',
-    ignore: [
-      /^\/\.vscode\//,
-      /^\/\.git\//,
-      /^\/src\//,
-      /\.map$/,
-      /\.md$/,
-      /\.log$/,
-      /^\/scripts\//,
-      /^\/\.temp\//,
-      /^\/\.tmp\//
-    ],
+    icon: './assets/icon.png',
     extraResource: [
-      './assets'
+      './assets/icon.png',
+      './assets/icon-16.png',
+      './assets/icon-32.png',
+      './assets/icon-48.png',
+      './assets/icon-128.png',
+      './assets/icon-256.png'
     ]
   },
   rebuildConfig: {},
